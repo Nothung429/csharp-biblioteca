@@ -5,8 +5,8 @@
 User myUser = new User("Mario", "Rossi", "mariorossi@gmail.com", "prova123", 333777888);
 
 //creazione prodotti
-Book myBook = new Book(12345678, 1200, "il signore degli anelli", 1954, "J. R. R. Tolkien", "fantasy", true);
-Film myFilm = new Film(87654321, 200, "il signore degli anelli: la compagnia dell'anello", 2001, "J. R. R. Tolkien", "fantasy", true);
+Book myBook = new Book("12345678", 1200, "il signore degli anelli", 1954, "J. R. R. Tolkien", "fantasy", true);
+Film myFilm = new Film("87654321", 200, "il signore degli anelli: la compagnia dell'anello", 2001, "J. R. R. Tolkien", "fantasy", true);
 
 //accesso
 Console.WriteLine("Esegui l'accesso");
@@ -17,7 +17,7 @@ if (verifyUserEmail == myUser.GetEmail() && verifyUserPassword == myUser.GetPass
     //ricerca
     Console.WriteLine("Cerca un libro");
     bool searchBooksTitle = myBook.title.Contains(Console.ReadLine());
-    bool searchBooksIsbn = myBook.title.Contains(Console.ReadLine());
+    bool searchBooksIsbn = myBook.GetIsbn().Contains(Console.ReadLine());
     if (searchBooksTitle == true || searchBooksIsbn == true)
     {
         Console.WriteLine($"Il libro esiste in libreria? {myBook.title} \n");
@@ -29,7 +29,7 @@ if (verifyUserEmail == myUser.GetEmail() && verifyUserPassword == myUser.GetPass
 
     Console.WriteLine("Cerca un film");
     bool searchFilmsTitle = myFilm.title.Contains(Console.ReadLine());
-    bool searchFilmsCode = myFilm.title.Contains(Console.ReadLine());
+    bool searchFilmsCode = myFilm.GetCode().Contains(Console.ReadLine());
     if (searchFilmsTitle == true || searchFilmsCode == true)
     {
         Console.WriteLine($"Il film esiste in libreria? {myFilm.title} \n");
@@ -163,16 +163,16 @@ public class Product
 //--------------------------------------------------------------------------//
 public class Book : Product
 {
-    private int ISBN;
+    private string ISBN;
     private int pageNumber;
 
-    public Book(int ISBN, int pageNumber, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
+    public Book(string ISBN, int pageNumber, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
     {
         this.ISBN = ISBN;
         this.pageNumber = pageNumber;
     }
 
-    public int GetIsbn()
+    public string GetIsbn()
     {
         return this.ISBN;
     }
@@ -185,15 +185,15 @@ public class Book : Product
 //--------------------------------------------------------------------------//
 public class Film : Product
 {
-    private int code;
+    private string code;
     private int duration;
 
-    public Film(int code, int duration, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
+    public Film(string code, int duration, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
     {
         this.code = code;
         this.duration = duration;
     }
-    public int GetCode()
+    public string GetCode()
     {
         return this.code;
     }
