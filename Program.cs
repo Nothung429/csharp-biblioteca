@@ -20,21 +20,25 @@
 //Deve essere possibile effettuare la ricerca dei prestiti dato nome e cognome di un utente.
 
 //creazione utente 
+using System.Linq;
+
 User myUser = new User("Mario", "Rossi", "mariorossi@gmail.com", "prova123", 333777888);
 
 //creazione prodotti
 Book myBook = new Book(12345678, 1200, "il signore degli anelli", 1954, "J. R. R. Tolkien", "fantasy", true);
 Film myFilm = new Film(87654321, 200, "il signore degli anelli: la compagnia dell'anello", 2001, "J. R. R. Tolkien", "fantasy", true);
 
+//accesso
 Console.WriteLine("Esegui l'accesso");
-bool verifyUserEmail = myUser.GetEmail().Contains(Console.ReadLine());
-bool verifyUserPassword = myUser.GetPassword().Contains(Console.ReadLine());
-if (verifyUserEmail == true && verifyUserPassword == true)
+string verifyUserEmail = Console.ReadLine();
+string verifyUserPassword = Console.ReadLine();
+if (verifyUserEmail == myUser.GetEmail() && verifyUserPassword == myUser.GetPassword())
 {
     //ricerca
     Console.WriteLine("Cerca un libro");
-    bool searchBooks = myBook.title.Contains(Console.ReadLine());
-    if (searchBooks == true)
+    bool searchBooksTitle = myBook.title.Contains(Console.ReadLine());
+    bool searchBooksIsbn = myBook.title.Contains(Console.ReadLine());
+    if (searchBooksTitle == true || searchBooksIsbn == true)
     {
         Console.WriteLine($"Il libro esiste in libreria? {myBook.title} \n");
     }
@@ -44,8 +48,9 @@ if (verifyUserEmail == true && verifyUserPassword == true)
     }
 
     Console.WriteLine("Cerca un film");
-    bool searchFilms = myFilm.title.Contains(Console.ReadLine());
-    if (searchFilms == true)
+    bool searchFilmsTitle = myFilm.title.Contains(Console.ReadLine());
+    bool searchFilmsCode = myFilm.title.Contains(Console.ReadLine());
+    if (searchFilmsTitle == true || searchFilmsCode == true)
     {
         Console.WriteLine($"Il film esiste in libreria? {myFilm.title} \n");
     }
@@ -53,10 +58,49 @@ if (verifyUserEmail == true && verifyUserPassword == true)
     {
         Console.WriteLine("Ci dispiace non abbiamo questo titolo \n");
     }
+
+    //prenotazione
+    if (myBook.status == true)
+    {
+        Console.WriteLine("Vuoi prenotare il libro?\n si/no");
+        if (Console.ReadLine() == "si")
+        {
+            Console.WriteLine($"{myBook.title} prenotato con successo");
+            myBook.status = false;
+        }
+        else
+        {
+            Console.WriteLine($"{myBook.title} non prenotato");
+            myBook.status = true;
+        }
+    } 
+    else
+    {
+        Console.WriteLine("Libro non disponibile");
+    }
+
+    if (myFilm.status == true)
+    {
+        Console.WriteLine("Vuoi prenotare il film?\n si/no");
+        if (Console.ReadLine() == "si")
+        {
+            Console.WriteLine($"{myFilm.title} prenotato con successo");
+            myFilm.status = false;
+        }
+        else
+        {
+            Console.WriteLine($"{myFilm.title} non prenotato");
+            myFilm.status = true;
+        }
+    }
+    else
+    {
+        Console.WriteLine("Film non disponibile");
+    }
 }
 else
 {
-    Console.WriteLine("Registrati");
+    Console.WriteLine("\nRegistrati\n");
 }
 
 //Console.WriteLine($"\nL'ISBN del libro è: {myBook.GetIsbn()}");
