@@ -1,6 +1,4 @@
-﻿Console.WriteLine("Hello, World!");
-
-//Si vuole progettare un sistema per la gestione di una biblioteca. Gli utenti si possono registrare al sistema, fornendo:
+﻿//Si vuole progettare un sistema per la gestione di una biblioteca. Gli utenti si possono registrare al sistema, fornendo:
 //    cognome,
 //    nome,
 //    email,
@@ -20,6 +18,26 @@
 
 //L’utente deve poter eseguire delle ricerche per codice o per titolo e, eventualmente, effettuare dei prestiti registrando il periodo (Dal/Al) del prestito e il documento.
 //Deve essere possibile effettuare la ricerca dei prestiti dato nome e cognome di un utente.
+
+Book myBook = new Book(12345678, 1200,"Il signore degli Anelli", 1954, "J. R. R. Tolkien", "fantasy", true);
+
+Console.WriteLine($"\nL'ISBN del libro è: {myBook.GetIsbn()}");
+Console.WriteLine($"Il numero di pagine del libro è: {myBook.GetPageNumber()}");
+Console.WriteLine($"Il titolo del libro è: {myBook.title}");
+Console.WriteLine($"L'anno di uscita del libro è: {myBook.year}");
+Console.WriteLine($"L'autore del libro è: {myBook.author}");
+Console.WriteLine($"La categoria del libro è: {myBook.category}");
+Console.WriteLine($"La disponibilità del libro è: {myBook.status} \n");
+
+Film myFilm = new Film(87654321, 200,"Il signore degli Anelli: la compagnia dell'anallo", 2001, "J. R. R. Tolkien", "fantasy", true);
+
+Console.WriteLine($"\nIl codice del film è: {myFilm.GetCode()}");
+Console.WriteLine($"La durata del film è: {myFilm.GetDuration()} minuti");
+Console.WriteLine($"Il titolo del film è: {myFilm.title}");
+Console.WriteLine($"L'anno di uscita del film è: {myFilm.year}");
+Console.WriteLine($"L'autore del film è: {myFilm.author}");
+Console.WriteLine($"La categoria del film è: {myFilm.category}");
+Console.WriteLine($"La disponibilità del film è: {myFilm.status} \n");
 
 public class User
 {
@@ -60,6 +78,9 @@ public class User
     }
 }
 
+//--------------------------------------------------------------------------//
+
+
 public class Product
 {
     protected internal int year;
@@ -78,31 +99,49 @@ public class Product
     }
 }
 
+//--------------------------------------------------------------------------//
+
+
+
+
 public class Book : Product
 {
     private int ISBN;
+    private int pageNumber;
 
-    public Book(int ISBN, int year, string title, string author, string category, bool status) : base(year, title, author, category, status)
+    public Book(int ISBN, int pageNumber, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
     {
         this.ISBN = ISBN;
+        this.pageNumber = pageNumber;
     }
 
     public int GetIsbn()
     {
         return this.ISBN;
     }
+    public int GetPageNumber()
+    {
+        return this.pageNumber;
+    }
 }
 
+//--------------------------------------------------------------------------//
 public class Film : Product
 {
     private int code;
+    private int duration;
 
-    public Film(int code, int year, string title, string author, string category, bool status) : base(year, title, author, category, status)
+    public Film(int code, int duration, string title, int year, string author, string category, bool status) : base(year, title, author, category, status)
     {
         this.code = code;
+        this.duration = duration;
     }
     public int GetCode()
     {
         return this.code;
+    }
+    public int GetDuration()
+    {
+        return this.duration;
     }
 }
