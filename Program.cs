@@ -42,16 +42,17 @@ if (verifyUserEmail == myUser.GetEmail() && verifyUserPassword == myUser.GetPass
     //prenotazione
     if (myBook.status == true)
     {
-        Console.WriteLine("Vuoi prenotare il libro?\n si/no");
+        Console.WriteLine("Vuoi prenotare il libro?\n si/no");        
         if (Console.ReadLine() == "si")
-        {
-            Console.WriteLine($"{myBook.title} prenotato con successo");
+        {            
+            Console.WriteLine("Per quale periodo vorresti prenotarlo?\n");
+            Console.WriteLine("Dal ");
+            string dataInizio = Console.ReadLine();
+            Console.WriteLine("Al ");
+            string dataFine = Console.ReadLine();
+            Console.WriteLine($"{myBook.title} prenotato con successo dal {dataInizio} al {dataFine}");
+            Console.WriteLine($"{myUser.GetName()} {myUser.GetSurname()} {myUser.GetPhone()}");
             myBook.status = false;
-        }
-        else
-        {
-            Console.WriteLine($"{myBook.title} non prenotato");
-            myBook.status = true;
         }
     } 
     else
@@ -64,13 +65,14 @@ if (verifyUserEmail == myUser.GetEmail() && verifyUserPassword == myUser.GetPass
         Console.WriteLine("Vuoi prenotare il film?\n si/no");
         if (Console.ReadLine() == "si")
         {
-            Console.WriteLine($"{myFilm.title} prenotato con successo");
+            Console.WriteLine("Per quale periodo vorresti prenotarlo?");
+            Console.WriteLine("Dal ");
+            string dataInizio = Console.ReadLine();
+            Console.WriteLine("Al ");
+            string dataFine = Console.ReadLine();
+            Console.WriteLine($"{myFilm.title} prenotato con successo dal {dataInizio} al {dataFine}");
+            Console.WriteLine($"{myUser.GetName()} {myUser.GetSurname()} {myUser.GetPhone()}");
             myFilm.status = false;
-        }
-        else
-        {
-            Console.WriteLine($"{myFilm.title} non prenotato");
-            myFilm.status = true;
         }
     }
     else
@@ -138,6 +140,7 @@ public class User
         return this.phone;
     }
 }
+
 //--------------------------------------------------------------------------//
 public class Product
 {
@@ -156,6 +159,7 @@ public class Product
         this.status = status;
     }
 }
+
 //--------------------------------------------------------------------------//
 public class Book : Product
 {
@@ -177,6 +181,7 @@ public class Book : Product
         return this.pageNumber;
     }
 }
+
 //--------------------------------------------------------------------------//
 public class Film : Product
 {
