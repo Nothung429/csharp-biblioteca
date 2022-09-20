@@ -56,7 +56,7 @@ if (verifyUserEmail == true && verifyUserPassword == true)
 }
 else
 {
-    Console.WriteLine("Registrati merda");
+    Console.WriteLine("Registrati");
 }
 
 //Console.WriteLine($"\nL'ISBN del libro è: {myBook.GetIsbn()}");
